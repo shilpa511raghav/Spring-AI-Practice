@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/v1")
 public class ChatController {
 
     private ChatClient chatClient;
@@ -17,8 +17,8 @@ public class ChatController {
         this.chatClient = builder.build();
     }
 
-    @GetMapping("/ollama/chat")
-    public ResponseEntity ollamaChat(@RequestParam(value = "q") String query) {
+    @GetMapping("/chat")
+    public ResponseEntity chat(@RequestParam(value = "q") String query) {
         String response = chatClient.prompt(query).call().content();
         return ResponseEntity.ok(response);
     }
